@@ -1,8 +1,6 @@
-scrippt.js
-script.js
 /* Typing Effect */
 
-const text = "Java-utvecklare | C++ Programmerare | Webbutvecklare";
+const text = "Java Developer | C++ Programmer | Web Developer";
 const typing = document.getElementById("typing");
 
 let i = 0;
@@ -45,7 +43,7 @@ sections.forEach(section => {
     observer.observe(section);
 });
 
-/* Top Button */
+/* Back to Top Button */
 
 const topBtn = document.getElementById("topBtn");
 
