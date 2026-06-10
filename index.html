@@ -1,155 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adam Watfa | Portfolio & Resume</title>
-
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adam Watfa | Portfolio & Resume</title>
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
+<canvas id="particles"></canvas>
+
 <header>
-
-    <button id="themeBtn">🌙 Dark Mode</button>
-
-    <h1>Adam Watfa</h1>
-
-    <h2 id="typing"></h2>
-
-    <p>Programmer | Java | C++ | HTML | CSS | JavaScript</p>
-
+<button id="themeBtn">🌙 Dark Mode</button>
+<h1>Adam Watfa</h1>
+<h2 id="typing"></h2>
+<p>Programmer | Java | C++ | HTML | CSS | JavaScript</p>
 </header>
 
 <div class="container">
 
-    <aside>
+<aside>
+<section>
+<h2>Contact</h2>
+<p>Email: your.email@example.com</p>
+<p>Phone: +46 XX XXX XX XX</p>
+<p>Location: Uppsala, Sweden</p>
+</section>
 
-        <section>
-            <h2>Contact</h2>
-            <p>Email: your.email@example.com</p>
-            <p>Phone: +46 XX XXX XX XX</p>
-            <p>Location: Uppsala, Sweden</p>
-        </section>
+<section>
+<h2>Languages</h2>
+<ul>
+<li>Swedish</li>
+<li>English</li>
+<li>Arabic</li>
+</ul>
+</section>
 
-        <section>
-            <h2>Languages</h2>
-            <ul>
-                <li>Swedish</li>
-                <li>English</li>
-                <li>Arabic</li>
-            </ul>
-        </section>
+<section>
+<h2>Technical Skills</h2>
 
-        <section>
-            <h2>Technical Skills</h2>
+<p>Java</p>
+<div class="skill"><div class="progress java"></div></div>
 
-            <p>Java</p>
-            <div class="skill">
-                <div class="progress java"></div>
-            </div>
+<p>C++</p>
+<div class="skill"><div class="progress cpp"></div></div>
 
-            <p>C++</p>
-            <div class="skill">
-                <div class="progress cpp"></div>
-            </div>
+<p>HTML / CSS / JavaScript</p>
+<div class="skill"><div class="progress web"></div></div>
 
-            <p>HTML / CSS / JavaScript</p>
-            <div class="skill">
-                <div class="progress web"></div>
-            </div>
+<p>Programming Experience: <span id="experience"></span> years</p>
+</section>
+</aside>
 
-            <p>
-                Programming Experience:
-                <span id="experience"></span> years
-            </p>
-        </section>
+<main>
+<section>
+<h2>Profile</h2>
+<p>
+Dedicated programmer with experience in Java, C++, HTML, CSS and JavaScript.
+Participated in projects through Uppsala Makerspace and studied web development.
+Enjoys problem solving and creating technical solutions.
+</p>
+</section>
 
-    </aside>
+<section>
+<h2>Work Experience</h2>
 
-    <main>
+<article>
+<h3>Programmer</h3>
+<p>Uppsala Makerspace | 2021 – Present</p>
+<ul>
+<li>Developed Java projects.</li>
+<li>Developed C++ projects.</li>
+<li>Participated in technical projects and problem solving.</li>
+</ul>
+</article>
 
-        <section>
-            <h2>Profile</h2>
+<article>
+<h3>Teacher</h3>
+<p>Uppsala Makerspace | Previous</p>
+<ul>
+<li>Planned and delivered lessons.</li>
+<li>Guided students in technology and programming.</li>
+<li>Supported and followed up students.</li>
+</ul>
+</article>
+</section>
 
-            <p>
-                Dedicated programmer with experience in Java, C++, HTML, CSS and JavaScript.
-                Participated in projects through Uppsala Makerspace and studied web development.
-                Enjoys problem solving and creating technical solutions.
-            </p>
-        </section>
+<section>
+<h2>Education</h2>
 
-        <section>
+<article>
+<h3>Programming and Technology</h3>
+<p>Uppsala Makerspace</p>
+</article>
 
-            <h2>Work Experience</h2>
+<article>
+<h3>Web Development and Programming</h3>
+<p>Codecademy</p>
+</article>
+</section>
 
-            <article>
-                <h3>Programmer</h3>
-                <p>Uppsala Makerspace | 2021 – Present</p>
+<section>
+<h2>Projects</h2>
 
-                <ul>
-                    <li>Developed Java projects.</li>
-                    <li>Developed C++ projects.</li>
-                    <li>Participated in technical projects and problem solving.</li>
-                </ul>
-            </article>
+<article>
+<h3>Personal Portfolio Website</h3>
+<p>Portfolio website built with HTML, CSS and JavaScript.</p>
+</article>
 
-            <article>
-                <h3>Teacher</h3>
-                <p>Uppsala Makerspace | Previous</p>
-
-                <ul>
-                    <li>Planned and delivered lessons.</li>
-                    <li>Guided students in technology and programming.</li>
-                    <li>Supported and followed up students.</li>
-                </ul>
-            </article>
-
-        </section>
-
-        <section>
-
-            <h2>Education</h2>
-
-            <article>
-                <h3>Programming and Technology</h3>
-                <p>Uppsala Makerspace</p>
-            </article>
-
-            <article>
-                <h3>Web Development and Programming</h3>
-                <p>Codecademy</p>
-            </article>
-
-        </section>
-
-        <section>
-
-            <h2>Projects</h2>
-
-            <article>
-                <h3>Personal Portfolio Website</h3>
-                <p>
-                    Portfolio website built with HTML, CSS and JavaScript.
-                </p>
-            </article>
-
-            <article>
-                <h3>Responsive Web Projects</h3>
-                <p>
-                    Responsive websites focused on usability and modern design.
-                </p>
-            </article>
-
-        </section>
-
-    </main>
+<article>
+<h3>Responsive Web Projects</h3>
+<p>Responsive websites focused on usability and modern design.</p>
+</article>
+</section>
+</main>
 
 </div>
 
 <button id="topBtn">↑</button>
 
 <script src="script.js"></script>
-
 </body>
 </html>
