@@ -1,111 +1,109 @@
-/* Typing Effect */
-
 const text = "Java Developer | C++ Programmer | Web Developer";
 const typing = document.getElementById("typing");
 
 let i = 0;
 
-function typeWriter() {
-    if (i < text.length) {
+function typeWriter(){
+    if(i < text.length){
         typing.textContent += text.charAt(i);
         i++;
-        setTimeout(typeWriter, 80);
+        setTimeout(typeWriter,80);
     }
 }
 
 typeWriter();
 
-/* Experience Counter */
-
 document.getElementById("experience").textContent =
 new Date().getFullYear() - 2021;
 
-/* Skill Bars */
-
-window.addEventListener("load", () => {
-    document.querySelector(".java").style.width = "90%";
-    document.querySelector(".cpp").style.width = "85%";
-    document.querySelector(".web").style.width = "95%";
+window.addEventListener("load",()=>{
+    document.querySelector(".java").style.width="90%";
+    document.querySelector(".cpp").style.width="85%";
+    document.querySelector(".web").style.width="95%";
 });
-
-/* Scroll Animation */
 
 const sections = document.querySelectorAll("section");
 
-sections.forEach(section => {
+sections.forEach(section=>{
     section.classList.add("hidden");
 });
 
-const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
+const observer = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){
             entry.target.classList.add("show");
         }
     });
 });
 
-sections.forEach(section => {
+sections.forEach(section=>{
     observer.observe(section);
 });
 
-/* Back to Top Button */
-
 const topBtn = document.getElementById("topBtn");
 
-window.addEventListener("scroll", () => {
-    if (window.scrollY > 300) {
-        topBtn.style.display = "block";
-    } else {
-        topBtn.style.display = "none";
+window.addEventListener("scroll",()=>{
+    if(window.scrollY > 300){
+        topBtn.style.display="block";
+    }else{
+        topBtn.style.display="none";
     }
 });
 
-topBtn.addEventListener("click", () => {
+topBtn.addEventListener("click",()=>{
     window.scrollTo({
-        top: 0,
-        behavior: "smooth"
+        top:0,
+        behavior:"smooth"
     });
 });
 
-/* Dark Mode */
-
-document.getElementById("themeBtn").addEventListener("click", () => {
+document.getElementById("themeBtn").addEventListener("click",()=>{
     document.body.classList.toggle("dark-mode");
 });
-
-/* Particles Background */
 
 const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+function resizeCanvas(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+resizeCanvas();
+
+window.addEventListener("resize", resizeCanvas);
 
 const particles = [];
 
-for (let i = 0; i < 60; i++) {
+for(let i=0;i<100;i++){
     particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        radius: Math.random() * 3 + 1,
-        speed: Math.random() + 0.3
+        x:Math.random()*window.innerWidth,
+        y:Math.random()*window.innerHeight,
+        dx:(Math.random()-0.5)*1.5,
+        dy:(Math.random()-0.5)*1.5,
+        radius:Math.random()*3+1
     });
 }
 
-function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
 
-    particles.forEach(p => {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(255,255,255,0.5)";
-        ctx.fill();
+    particles.forEach(p=>{
+        p.x += p.dx;
+        p.y += p.dy;
 
-        p.y -= p.speed;
-
-        if (p.y < 0) {
-            p.y = canvas.height;
+        if(p.x < 0 || p.x > canvas.width){
+            p.dx *= -1;
         }
+
+        if(p.y < 0 || p.y > canvas.height){
+            p.dy *= -1;
+        }
+
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.radius,0,Math.PI*2);
+        ctx.fillStyle = "rgba(255,255,255,0.7)";
+        ctx.fill();
     });
 
     requestAnimationFrame(animate);
