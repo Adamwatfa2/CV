@@ -70,23 +70,22 @@ function resizeCanvas(){
 }
 
 resizeCanvas();
-
 window.addEventListener("resize", resizeCanvas);
 
 const particles = [];
 
-for(let i=0;i<100;i++){
+for(let i = 0; i < 80; i++){
     particles.push({
-        x:Math.random()*window.innerWidth,
-        y:Math.random()*window.innerHeight,
-        dx:(Math.random()-0.5)*1.5,
-        dy:(Math.random()-0.5)*1.5,
-        radius:Math.random()*3+1
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        dx: (Math.random() - 0.5) * 1.5,
+        dy: (Math.random() - 0.5) * 1.5,
+        radius: Math.random() * 3 + 1
     });
 }
 
 function animate(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     particles.forEach(p=>{
         p.x += p.dx;
@@ -101,10 +100,26 @@ function animate(){
         }
 
         ctx.beginPath();
-        ctx.arc(p.x,p.y,p.radius,0,Math.PI*2);
-        ctx.fillStyle = "rgba(255,255,255,0.7)";
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(255,255,255,0.8)";
         ctx.fill();
     });
+
+    for(let a = 0; a < particles.length; a++){
+        for(let b = a + 1; b < particles.length; b++){
+            let dx = particles[a].x - particles[b].x;
+            let dy = particles[a].y - particles[b].y;
+            let distance = Math.sqrt(dx * dx + dy * dy);
+
+            if(distance < 120){
+                ctx.beginPath();
+                ctx.moveTo(particles[a].x, particles[a].y);
+                ctx.lineTo(particles[b].x, particles[b].y);
+                ctx.strokeStyle = "rgba(255,255,255,0.15)";
+                ctx.stroke();
+            }
+        }
+    }
 
     requestAnimationFrame(animate);
 }
