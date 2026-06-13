@@ -209,3 +209,22 @@ article:hover{
         font-size:2rem;
     }
 }
+#musicBtn{
+    position:fixed;
+    bottom:90px;
+    right:20px;
+    width:60px;
+    height:60px;
+    border:none;
+    border-radius:50%;
+    background:#065f46;
+    color:white;
+    font-size:25px;
+    cursor:pointer;
+    z-index:1000;
+    box-shadow:0 5px 15px rgba(0,0,0,0.3);
+}
+
+#musicBtn:hover{
+    background:#10b981;
+}
