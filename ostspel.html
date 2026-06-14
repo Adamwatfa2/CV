@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Ostspel</title>
+</head>
+<body>
+
+<h1>🧀 Ostspel</h1>
+<p>Poäng: <span id="score">0</span></p>
+
+<button onclick="eatCheese()" style="font-size:50px;">
+🧀
+</button>
+
+<br><br>
+
+<a href="index.html">⬅ Tillbaka</a>
+
+<script>
+let score = 0;
+
+function eatCheese(){
+    score = score + 1;
+    document.getElementById("score").textContent = score;
+}
+</script>
+
+</body>
+</html>
