@@ -3,14 +3,25 @@
 <head>
 <title>Ostspel</title>
 </head>
-<body>
+<body style="text-align:center; background:#d1fae5; overflow:hidden;">
 
 <h1>🧀 Ostspel</h1>
 <p>Poäng: <span id="score">0</span></p>
 
-<button onclick="eatCheese()" style="font-size:50px;">
+<button id="cheese"
+onclick="eatCheese()"
+style="
+font-size:50px;
+position:absolute;
+left:200px;
+top:200px;
+">
 🧀
 </button>
+
+<audio id="music" loop>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
 
 <br><br>
 
@@ -18,10 +29,30 @@
 
 <script>
 let score = 0;
+let size = 50;
+let started = false;
 
 function eatCheese(){
-    score = score + 1;
+
+    if(!started){
+        document.getElementById("music").play();
+        started = true;
+    }
+
+    score++;
     document.getElementById("score").textContent = score;
+
+    size += 5;
+
+    let cheese = document.getElementById("cheese");
+
+    cheese.style.fontSize = size + "px";
+
+    cheese.style.left =
+    Math.random() * (window.innerWidth - 100) + "px";
+
+    cheese.style.top =
+    Math.random() * (window.innerHeight - 150) + "px";
 }
 </script>
 
