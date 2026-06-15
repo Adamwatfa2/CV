@@ -8,10 +8,9 @@ body{
     font-family:Arial, sans-serif;
     background:#10b981;
     color:#333;
-    min-height:100vh;
 }
 
-canvas{
+#particles{
     position:fixed;
     top:0;
     left:0;
@@ -36,22 +35,12 @@ header{
 }
 
 .profile-pic{
-    width:140px;
-    height:140px;
+    width:170px;
+    height:170px;
     object-fit:cover;
-    border-radius:15px; /* ändra till 50% om du vill ha cirkel */
+    border-radius:15px;
     display:block;
     margin:10px auto;
-}
-
-header h1{
-    font-size:2.8rem;
-    margin-bottom:10px;
-}
-
-#typing{
-    height:35px;
-    color:#a7f3d0;
 }
 
 #themeBtn{
@@ -62,6 +51,11 @@ header h1{
     border:none;
     border-radius:8px;
     cursor:pointer;
+}
+
+#typing{
+    color:#a7f3d0;
+    height:35px;
 }
 
 .container{
@@ -108,11 +102,6 @@ article{
     border-left:5px solid #10b981;
     border-radius:8px;
     margin-bottom:15px;
-    transition:0.3s;
-}
-
-article:hover{
-    transform:translateX(5px);
 }
 
 .skill{
@@ -131,10 +120,25 @@ article:hover{
     transition:2s;
 }
 
+.play-btn{
+    display:inline-block;
+    margin-top:10px;
+    padding:12px 20px;
+    background:#10b981;
+    color:white;
+    text-decoration:none;
+    border-radius:10px;
+    font-weight:bold;
+}
+
+.play-btn:hover{
+    background:#065f46;
+}
+
 .hidden{
     opacity:0;
     transform:translateY(40px);
-    transition:all .8s ease;
+    transition:0.8s;
 }
 
 .show{
@@ -146,16 +150,15 @@ article:hover{
     position:fixed;
     bottom:20px;
     right:20px;
-    border:none;
-    background:#10b981;
-    color:white;
-    font-size:20px;
     width:50px;
     height:50px;
+    border:none;
     border-radius:50%;
+    background:#10b981;
+    color:white;
+    font-size:22px;
     cursor:pointer;
     display:none;
-    box-shadow:0 5px 15px rgba(0,0,0,.3);
     z-index:9999;
 }
 
@@ -172,11 +175,6 @@ article:hover{
     font-size:25px;
     cursor:pointer;
     z-index:9999;
-    display:block;
-}
-
-#musicBtn:hover{
-    background:#10b981;
 }
 
 .dark-mode{
@@ -202,14 +200,6 @@ article:hover{
 }
 
 @media(max-width:768px){
-
-    .profile-pic{
-        width:170px;
-        height:170px;
-        object-fit:cover;
-        border-radius:15px;
-    }
-
     .container{
         flex-direction:column;
     }
@@ -219,22 +209,12 @@ article:hover{
         width:100%;
     }
 
+    .profile-pic{
+        width:170px;
+        height:170px;
+    }
+
     header h1{
         font-size:2rem;
     }
-}
-.play-btn{
-    display:inline-block;
-    margin-top:10px;
-    padding:12px 20px;
-    background:#10b981;
-    color:white;
-    text-decoration:none;
-    border-radius:8px;
-    font-weight:bold;
-    transition:0.3s;
-}
-.play-btn:hover{
-    background:#065f46;
-    transform:scale(1.05);
 }
