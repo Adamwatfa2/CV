@@ -1,27 +1,41 @@
+// Typing effect
 const text = "Java Developer | C++ Programmer | Web Developer";
 const typing = document.getElementById("typing");
 
-let i = 0;
+if (typing) {
+    let i = 0;
 
-function typeWriter(){
-    if(i < text.length){
-        typing.textContent += text.charAt(i);
-        i++;
-        setTimeout(typeWriter, 80);
+    function typeWriter() {
+        if (i < text.length) {
+            typing.textContent += text.charAt(i);
+            i++;
+            setTimeout(typeWriter, 80);
+        }
     }
+
+    typeWriter();
 }
 
-typeWriter();
+// Experience years
+const experience = document.getElementById("experience");
 
-document.getElementById("experience").textContent =
-new Date().getFullYear() - 2021;
+if (experience) {
+    experience.textContent = new Date().getFullYear() - 2021;
+}
 
+// Skill bars
 window.addEventListener("load", () => {
-    document.querySelector(".java").style.width = "90%";
-    document.querySelector(".cpp").style.width = "85%";
-    document.querySelector(".web").style.width = "95%";
+
+    const java = document.querySelector(".java");
+    const cpp = document.querySelector(".cpp");
+    const web = document.querySelector(".web");
+
+    if(java) java.style.width = "90%";
+    if(cpp) cpp.style.width = "85%";
+    if(web) web.style.width = "95%";
 });
 
+// Show sections
 const sections = document.querySelectorAll("section");
 
 sections.forEach(section => {
@@ -40,105 +54,137 @@ sections.forEach(section => {
     observer.observe(section);
 });
 
+// Scroll button
 const topBtn = document.getElementById("topBtn");
 
-window.addEventListener("scroll", () => {
-    if(window.scrollY > 300){
-        topBtn.style.display = "block";
-    }else{
-        topBtn.style.display = "none";
-    }
-});
+if(topBtn){
 
-topBtn.addEventListener("click", () => {
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
+    window.addEventListener("scroll", () => {
+        topBtn.style.display =
+            window.scrollY > 300 ? "block" : "none";
     });
-});
 
-document.getElementById("themeBtn").addEventListener("click", () => {
-    document.body.classList.toggle("dark-mode");
-});
+    topBtn.addEventListener("click", () => {
+        window.scrollTo({
+            top:0,
+            behavior:"smooth"
+        });
+    });
+}
 
+// Dark mode
+const themeBtn = document.getElementById("themeBtn");
+
+if(themeBtn){
+    themeBtn.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+    });
+}
+
+// Music
 const musicBtn = document.getElementById("musicBtn");
 const bgMusic = document.getElementById("bgMusic");
 
-let playing = false;
+if(musicBtn && bgMusic){
 
-musicBtn.addEventListener("click", () => {
-    if(!playing){
-        bgMusic.play();
-        musicBtn.textContent = "🔇";
-        playing = true;
-    }else{
-        bgMusic.pause();
-        musicBtn.textContent = "🎵";
-        playing = false;
-    }
-});
+    let playing = false;
 
+    musicBtn.addEventListener("click", () => {
+
+        if(!playing){
+            bgMusic.play();
+            musicBtn.textContent = "🔇";
+            playing = true;
+        }else{
+            bgMusic.pause();
+            musicBtn.textContent = "🎵";
+            playing = false;
+        }
+
+    });
+}
+
+// Particles background
 const canvas = document.getElementById("particles");
-const ctx = canvas.getContext("2d");
 
-function resizeCanvas(){
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-}
+if(canvas){
 
-resizeCanvas();
-window.addEventListener("resize", resizeCanvas);
+    const ctx = canvas.getContext("2d");
 
-const particles = [];
+    function resizeCanvas(){
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
 
-for(let p = 0; p < 100; p++){
-    particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        dx: (Math.random() - 0.5) * 1.5,
-        dy: (Math.random() - 0.5) * 1.5,
-        radius: Math.random() * 3 + 1
-    });
-}
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
 
-function animate(){
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const particles = [];
 
-    particles.forEach(p => {
-        p.x += p.dx;
-        p.y += p.dy;
+    for(let i = 0; i < 80; i++){
 
-        if(p.x < 0 || p.x > canvas.width){
-            p.dx *= -1;
-        }
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            dx: (Math.random() - 0.5) * 1.5,
+            dy: (Math.random() - 0.5) * 1.5,
+            radius: Math.random() * 3 + 1
+        });
 
-        if(p.y < 0 || p.y > canvas.height){
-            p.dy *= -1;
-        }
+    }
 
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(255,255,255,0.8)";
-        ctx.fill();
-    });
+    function animate(){
 
-    for(let a = 0; a < particles.length; a++){
-        for(let b = a + 1; b < particles.length; b++){
-            let dx = particles[a].x - particles[b].x;
-            let dy = particles[a].y - particles[b].y;
-            let distance = Math.sqrt(dx * dx + dy * dy);
+        ctx.clearRect(0,0,canvas.width,canvas.height);
 
-            if(distance < 120){
-                ctx.beginPath();
-                ctx.moveTo(particles[a].x, particles[a].y);
-                ctx.lineTo(particles[b].x, particles[b].y);
-                ctx.strokeStyle = "rgba(255,255,255,0.15)";
-                ctx.stroke();
+        particles.forEach(p => {
+
+            p.x += p.dx;
+            p.y += p.dy;
+
+            if(p.x < 0 || p.x > canvas.width) p.dx *= -1;
+            if(p.y < 0 || p.y > canvas.height) p.dy *= -1;
+
+            ctx.beginPath();
+            ctx.arc(p.x,p.y,p.radius,0,Math.PI*2);
+            ctx.fillStyle = "rgba(255,255,255,0.8)";
+            ctx.fill();
+
+        });
+
+        for(let a = 0; a < particles.length; a++){
+
+            for(let b = a + 1; b < particles.length; b++){
+
+                let dx = particles[a].x - particles[b].x;
+                let dy = particles[a].y - particles[b].y;
+
+                let distance =
+                    Math.sqrt(dx*dx + dy*dy);
+
+                if(distance < 120){
+
+                    ctx.beginPath();
+                    ctx.moveTo(
+                        particles[a].x,
+                        particles[a].y
+                    );
+
+                    ctx.lineTo(
+                        particles[b].x,
+                        particles[b].y
+                    );
+
+                    ctx.strokeStyle =
+                        "rgba(255,255,255,0.15)";
+
+                    ctx.stroke();
+                }
             }
         }
+
+        requestAnimationFrame(animate);
     }
 
-    requestAnimationFrame(animate);
+    animate();
 }
-
-animate();
