@@ -134,7 +134,20 @@ function animate() {
                 ctx.strokeStyle = "rgba(255,255,255,0.15)";
                 ctx.stroke();
             }
-        }
+       article{
+    background:#f0fdf4;
+    padding:15px;
+    border-left:5px solid #10b981;
+    border-radius:8px;
+    margin-bottom:15px;
+    transition:all 0.3s ease;
+    cursor:pointer;
+}
+
+article:hover{
+    transform:translateX(10px);
+    box-shadow:0 10px 25px rgba(0,0,0,0.25);
+} }
     }
 
     requestAnimationFrame(animate);
