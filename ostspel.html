@@ -44,6 +44,29 @@ p{
     cursor:pointer;
 }
 
+#leaderboard{
+    position:fixed;
+    top:15px;
+    right:15px;
+    background:white;
+    color:#065f46;
+    padding:15px;
+    border-radius:15px;
+    width:210px;
+    text-align:left;
+}
+
+#leaderboard h2{
+    text-align:center;
+    margin:0 0 10px;
+}
+
+#leaderboard ol{
+    margin:0;
+    padding-left:25px;
+    font-weight:bold;
+}
+
 #messageBox{
     display:none;
     position:fixed;
@@ -54,7 +77,6 @@ p{
     color:#065f46;
     padding:25px;
     border-radius:20px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.3);
     z-index:9999;
 }
 
@@ -73,6 +95,12 @@ p{
 }
 
 @media(max-width:768px){
+    #leaderboard{
+        width:150px;
+        font-size:12px;
+        padding:10px;
+    }
+
     #cheese{
         font-size:42px;
     }
@@ -87,13 +115,21 @@ p{
 <p>Time: <span id="timer">60</span></p>
 <p>Score: <span id="score">0</span></p>
 
+<div id="leaderboard">
+<h2>🏆 Leaderboard</h2>
+<ol id="leaderList"></ol>
+</div>
+
 <button id="cheese" onclick="eatCheese()">🧀</button>
 
 <div id="messageBox">
-    <h2>⏰ Time's Up!</h2>
-    <p>Your Score: <span id="finalScore">0</span></p>
-    <button id="playAgainBtn" onclick="playAgain()">🔁 Play Again</button>
-    <a href="index.html" id="backBtn">⬅ Back</a>
+<h2>⏰ Time's Up!</h2>
+<p>Your Score: <span id="finalScore">0</span></p>
+<input id="playerName" placeholder="Enter your name">
+<br><br>
+<button onclick="saveScore()">Save Score</button>
+<button id="playAgainBtn" onclick="playAgain()">🔁 Play Again</button>
+<a href="index.html" id="backBtn">⬅ Back</a>
 </div>
 
 <audio id="music" loop>
@@ -106,27 +142,36 @@ let timeLeft = 60;
 let musicStarted = false;
 let gameOver = false;
 
-let timerInterval = setInterval(function(){
+function showLeaderboard(){
+    let leaderboard = JSON.parse(localStorage.getItem("cheeseLeaderboard")) || [];
+    let list = document.getElementById("leaderList");
 
+    list.innerHTML = "";
+
+    leaderboard.forEach(function(player){
+        let li = document.createElement("li");
+        li.textContent = player.name + " - " + player.score;
+        list.appendChild(li);
+    });
+}
+
+showLeaderboard();
+
+let timerInterval = setInterval(function(){
     timeLeft--;
     document.getElementById("timer").textContent = timeLeft;
 
     if(timeLeft <= 0){
         clearInterval(timerInterval);
         gameOver = true;
-
         document.getElementById("cheese").style.display = "none";
         document.getElementById("finalScore").textContent = score;
         document.getElementById("messageBox").style.display = "block";
     }
-
 }, 1000);
 
 function eatCheese(){
-
-    if(gameOver){
-        return;
-    }
+    if(gameOver) return;
 
     if(!musicStarted){
         document.getElementById("music").play();
@@ -137,16 +182,36 @@ function eatCheese(){
     document.getElementById("score").textContent = score;
 
     let cheese = document.getElementById("cheese");
-
     let maxX = window.innerWidth - cheese.offsetWidth;
     let maxY = window.innerHeight - cheese.offsetHeight - 80;
 
-    let randomX = Math.random() * maxX;
-    let randomY = Math.random() * maxY + 80;
-
-    cheese.style.left = randomX + "px";
-    cheese.style.top = randomY + "px";
+    cheese.style.left = Math.random() * maxX + "px";
+    cheese.style.top = Math.random() * maxY + 80 + "px";
     cheese.style.transform = "none";
+}
+
+function saveScore(){
+    let name = document.getElementById("playerName").value;
+
+    if(name === ""){
+        name = "Customer";
+    }
+
+    let leaderboard = JSON.parse(localStorage.getItem("cheeseLeaderboard")) || [];
+
+    leaderboard.push({
+        name: name,
+        score: score
+    });
+
+    leaderboard.sort(function(a,b){
+        return b.score - a.score;
+    });
+
+    leaderboard = leaderboard.slice(0,5);
+
+    localStorage.setItem("cheeseLeaderboard", JSON.stringify(leaderboard));
+    showLeaderboard();
 }
 
 function playAgain(){
