@@ -27,7 +27,8 @@ p{
     font-weight:bold;
 }
 
-#score{
+#score,
+#timer{
     color:yellow;
 }
 
@@ -70,11 +71,6 @@ p{
         font-size:45px;
         padding:8px;
     }
-
-    #backBtn{
-        font-size:14px;
-        padding:8px 12px;
-    }
 }
 </style>
 
@@ -82,6 +78,8 @@ p{
 <body>
 
 <h1>🧀 Cheese Game</h1>
+
+<p>Time: <span id="timer">60</span></p>
 <p>Score: <span id="score">0</span></p>
 
 <button id="cheese" onclick="eatCheese()">🧀</button>
@@ -94,45 +92,37 @@ p{
 
 <script>
 let score = 0;
+let timeLeft = 60;
 let musicStarted = false;
+let gameOver = false;
 
-setInterval(function(){
+let timerInterval = setInterval(function(){
 
-    let newCheese = document.createElement("button");
+    timeLeft--;
+    document.getElementById("timer").textContent = timeLeft;
 
-    newCheese.textContent = "🧀";
+    if(timeLeft <= 0){
+        clearInterval(timerInterval);
+        gameOver = true;
 
-    newCheese.style.position = "absolute";
-    newCheese.style.fontSize = "40px";
-    newCheese.style.border = "none";
-    newCheese.style.background = "white";
-    newCheese.style.borderRadius = "15px";
-    newCheese.style.cursor = "pointer";
+        document.getElementById("cheese").style.display = "none";
 
-    newCheese.style.left =
-        Math.random() * (window.innerWidth - 100) + "px";
+        let playerName = prompt("⏰ Time's Up! Enter Your Name:");
 
-    newCheese.style.top =
-        Math.random() * (window.innerHeight - 100) + "px";
-
-    newCheese.onclick = function(){
-
-        if(!musicStarted){
-            document.getElementById("music").play();
-            musicStarted = true;
+        if(playerName === null || playerName === ""){
+            playerName = "Player";
         }
 
-        score++;
-        document.getElementById("score").textContent = score;
+        alert("Player: " + playerName + "\nScore: " + score);
+    }
 
-        newCheese.remove();
-    };
-
-    document.body.appendChild(newCheese);
-
-}, 3000);
+}, 1000);
 
 function eatCheese(){
+
+    if(gameOver){
+        return;
+    }
 
     if(!musicStarted){
         document.getElementById("music").play();
@@ -147,9 +137,12 @@ function eatCheese(){
     let maxX = window.innerWidth - cheese.offsetWidth;
     let maxY = window.innerHeight - cheese.offsetHeight - 80;
 
-    cheese.style.left = Math.random() * maxX + "px";
-    cheese.style.top = Math.random() * maxY + 80 + "px";
+    let randomX = Math.random() * maxX;
+    let randomY = Math.random() * maxY + 80;
 
+    cheese.style.left = randomX + "px";
+    cheese.style.top = randomY + "px";
+    cheese.style.transform = "none";
 }
 </script>
 
