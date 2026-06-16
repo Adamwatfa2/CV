@@ -58,18 +58,59 @@ p{
     font-weight:bold;
 }
 
+#leaderboard{
+    position:fixed;
+    top:20px;
+    right:20px;
+    background:white;
+    color:#065f46;
+    padding:15px;
+    border-radius:15px;
+    width:220px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.3);
+    text-align:left;
+}
+
+#leaderboard h2{
+    text-align:center;
+    margin:0 0 10px 0;
+}
+
+#leaderboard ol{
+    padding-left:25px;
+    margin:0;
+    font-weight:bold;
+}
+
+#leaderboard li{
+    margin-bottom:6px;
+}
+
 @media(max-width:768px){
     h1{
-        font-size:26px;
+        font-size:24px;
     }
 
     p{
-        font-size:20px;
+        font-size:18px;
     }
 
     #cheese{
-        font-size:45px;
+        font-size:42px;
         padding:8px;
+    }
+
+    #leaderboard{
+        width:160px;
+        font-size:12px;
+        top:10px;
+        right:10px;
+        padding:10px;
+    }
+
+    #backBtn{
+        font-size:14px;
+        padding:8px 12px;
     }
 }
 </style>
@@ -81,6 +122,11 @@ p{
 
 <p>Time: <span id="timer">60</span></p>
 <p>Score: <span id="score">0</span></p>
+
+<div id="leaderboard">
+    <h2>🏆 Leaderboard</h2>
+    <ol id="leaderList"></ol>
+</div>
 
 <button id="cheese" onclick="eatCheese()">🧀</button>
 
@@ -95,6 +141,21 @@ let score = 0;
 let timeLeft = 60;
 let musicStarted = false;
 let gameOver = false;
+
+function showLeaderboard(){
+    let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+    let leaderList = document.getElementById("leaderList");
+
+    leaderList.innerHTML = "";
+
+    leaderboard.forEach(function(player){
+        let li = document.createElement("li");
+        li.textContent = player.name + " - " + player.score;
+        leaderList.appendChild(li);
+    });
+}
+
+showLeaderboard();
 
 let timerInterval = setInterval(function(){
 
@@ -112,6 +173,23 @@ let timerInterval = setInterval(function(){
         if(playerName === null || playerName === ""){
             playerName = "Player";
         }
+
+        let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+
+        leaderboard.push({
+            name: playerName,
+            score: score
+        });
+
+        leaderboard.sort(function(a, b){
+            return b.score - a.score;
+        });
+
+        leaderboard = leaderboard.slice(0, 5);
+
+        localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+
+        showLeaderboard();
 
         alert("Player: " + playerName + "\nScore: " + score);
     }
